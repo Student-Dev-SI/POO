@@ -3,14 +3,14 @@
 Estudo de Programação Orientada Objeto
 </h4>
 
-## Installation
+## Informações
 
 #### Dependencies
 ```
 $ Foi baixado a extensão no vsCode
 ```
 
-######  Run the application
+######  Para Rodar
 ```
 $ py "selecione o arquivo"
 ```
