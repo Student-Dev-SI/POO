@@ -71,9 +71,9 @@ class Carro:
         print(f'ligado: {self.ligado}')
 
 def main():
-    carro1 = Carro("Volkswagen Gol", "1", "2019")
-    carro2 = Carro("Hyundai HB20", "2", "2017")
-    carro3 = Carro("Chevrolet Onix", "3", "2020")
+    carro1 = Carro("Volkswagen", "Gol", "2019")
+    carro2 = Carro("Hyundai", "H20", "2017")
+    carro3 = Carro("Chevrolet", "Onix", "2020")
     carro4 = Carro("Fiat Mobi", "4", "2018")
     carro5 = Carro("Ford", "Fiesta", "2020")
 

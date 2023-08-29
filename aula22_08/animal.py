@@ -74,5 +74,5 @@ def main():
 
 # __ = é uma variavél que vai receber um valor então no python ele recebe esse __
 # inicializar 
-# if __name__=="__main__":
-    # main()
+if __name__=="__main__":
+    main()
