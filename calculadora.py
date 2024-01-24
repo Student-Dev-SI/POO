@@ -25,7 +25,8 @@ class Calculadora(ABC):
     def calcular(self, a: float, b: float):
         pass
 
-    def exibeNome(self):
+    @property
+    def nome(self):
         return self.__nome
 
 class Soma(Calculadora):
