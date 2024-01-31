@@ -45,7 +45,7 @@ class Divisao(Calculadora):
 
     def verificaValor(self, a, b) :
          if a == '' or b == '':
-                raise TypeError
+            raise TypeError
 
     def calcular(self, a: float, b: float) -> str:
         # para tratamento de erro 
