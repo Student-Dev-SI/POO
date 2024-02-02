@@ -35,11 +35,12 @@ class Zoologico:
     capacidade = 5
     animais = []
     
-    def adicionar_animal(self, animal: Animal) -> None:
-        if len(self.animais) < self.capacidade:
-            self.animais.append(animal)
-        else:
-            print("limite excedido!")
+    def adicionar_animal(self) -> None:
+        print(self)
+        # if len(self) < self.capacidade:
+        #     self.append(self.animais)
+        # else:
+        #     print("limite excedido!")
 
     def mostrar_animais(self) -> None:
         for animal in self.animais:
@@ -47,15 +48,15 @@ class Zoologico:
 
         print(f"capacidade : {self.capacidade}")
 
-listaAnimal = Zoologico()
+# listaAnimal = Zoologico()
 
-animal1 = Animal('Leao', 'mamifero', 25)
-animal2 = Animal('Tigre', 'mamifero', 15)
-animal3 = Animal('Vaca', 'mamifero', 20)
-animal4 = Animal('Golfinho', 'mamifero', 30)
-animal5 = Animal('Golfinho', 'mamifero', 30)
-animal6 = Animal('Golfinho', 'mamifero', 30)
+# animal1 = Animal('Leao', 'mamifero', 25)
+# animal2 = Animal('Tigre', 'mamifero', 15)
+# animal3 = Animal('Vaca', 'mamifero', 20)
+# animal4 = Animal('Golfinho', 'mamifero', 30)
+# animal5 = Animal('Golfinho', 'mamifero', 30)
+# animal6 = Animal('Golfinho', 'mamifero', 30)
 # para erro 
 # animal4 = Animal("nome", "", 30)
 
-listaAnimal.mostrar_animais()
+# listaAnimal.mostrar_animais()
