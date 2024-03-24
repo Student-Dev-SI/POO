@@ -28,7 +28,6 @@ class Livro:
 
     def devolucao(self) -> None:
         self.status = "Disponível"
-        pass
 
     def __repr__(self) -> str:
         return f"{self.titulo}, {self.autor}, {self.ISBN}, {self.status}"
