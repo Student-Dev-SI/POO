@@ -51,7 +51,7 @@ def retornoPadrao(url):
         dados = resp.json()
         return dados
     else:
-       raise PokemonNaoExisteException("O Pokémon não foi encontrado.")
+        raise PokemonNaoExisteException("O Pokémon não foi encontrado.")
 
 def retornaDadosPorDados(nome):
     nome = nome.lower()
@@ -63,16 +63,17 @@ def retornaDadosPorSpecies(nome):
     url = urlSpecies + nome
     return retornoPadrao(url)
 
+
 # ============================================================================
 
-# Exercicios 
+# Exercicios
+
 
 def nome_do_pokemon(numero):
     url = urlBase + str(numero)
     dados = retornoPadrao(url)
     return dados["name"]
 
-# print(nome_do_pokemon(1))
 
 """
 Abaixo, criamos uma excessão com nome personalizado, que será utilizada do exercicio 2 
@@ -108,8 +109,7 @@ olhe o arquivo requests_exemplo
 def numero_do_pokemon(nome):
     dados = retornaDadosPorDados(nome)
     return dados["id"]
-   
-    
+
 """
 3. Dado o nome ou número de um pokémon, qual é o nome da cor (em inglês) predominante dele?
 
@@ -120,9 +120,11 @@ Dica: Ainda esperamos a PokemonNaoExisteException quando apropriado.
 Não vou mais te avisar disso.
 """
 
+
 def color_of_pokemon(nome):
     dados = retornaDadosPorSpecies(nome)
     return dados["color"]["name"]
+
 
 dic_cores = {  # esse dicionário pode te ajudar com o exercicio 4
     "brown": "marrom",
@@ -134,7 +136,7 @@ dic_cores = {  # esse dicionário pode te ajudar com o exercicio 4
     "red": "vermelho",
     "white": "branco",
     "green": "verde",
-    "black": "preto"
+    "black": "preto",
 }
 
 
@@ -149,13 +151,13 @@ seja útil.
 
 def cor_do_pokemon(nome):
     name = color_of_pokemon(nome)
-    if name in dic_cores:     
+    if name in dic_cores:
         return dic_cores[name]
 
 
 dic_tipos = {  # esse dicionário pode te ajudar com o exercicio 5
     "normal": "normal",
-    "fighting": "lutador",   
+    "fighting": "lutador",
     "flying": "voador",
     "poison": "veneno",
     "ground": "terra",
@@ -171,7 +173,7 @@ dic_tipos = {  # esse dicionário pode te ajudar com o exercicio 5
     "ice": "gelo",
     "dragon": "dragão",
     "dark": "noturno",
-    "fairy": "fada"
+    "fairy": "fada",
 }
 
 
@@ -188,6 +190,7 @@ Dica: novamente, dê uma olhada nas URL que separei. Elas bastam.
 Isso será verdade para todo o arquivo.
 """
 
+
 def tipos_do_pokemon(nome):
     tipos = []
     dados = retornaDadosPorDados(nome)
@@ -196,6 +199,7 @@ def tipos_do_pokemon(nome):
         if tipo in dic_tipos:
             tipos.append(dic_tipos[tipo])
     return tipos
+
 
 """
 6. Dado o nome de um pokémon, liste de qual pokémon ele evoluiu.
@@ -206,6 +210,7 @@ Por exemplo,
 evolucao_anterior('bulbasaur') == None
 """
 
+
 def evolucao_anterior(nome):
     detalhes = retornaDadosPorSpecies(nome)
     evolucao = detalhes["evolves_from_species"]
@@ -214,9 +219,10 @@ def evolucao_anterior(nome):
     else:
         return None
 
-'''
+
+"""
 Pulamos o exercicio 7. Depois te conto mais. Vá direto para o 8
-'''
+"""
 
 """
 8. A medida que ganham pontos de experiência, os pokémons sobem de nível.
@@ -227,6 +233,8 @@ Valores negativos de experiência devem ser considerados inválidos.
 dica: na URL pokemon-species, procure growth rate
 """
 
+
+# dados da experiencia
 def nivel_do_pokemon(nome, experiencia):
     species = retornaDadosPorSpecies(nome)
     url_growth = species["growth_rate"]["url"]
@@ -242,12 +250,9 @@ def nivel_do_pokemon(nome, experiencia):
         return dados
 
 
-"""
-A partir daqui, você precisará rodar o servidor treinador.py na sua máquina para poder
-fazer a atividade. Não precisa mexer no arquivo, basta rodar ele.
+# ===============================================================================================
 
-Os testes relativos ao treinador.py estao no arquivo pokemon_treinador_unittest.py
-Ou seja, você escreve o código aqui, mas testa com o pokemon_treinador_unittest.py
+"""
 
 9. Dado um nome de treinador, cadastre-o na API de treinador.
 Retorne True se um treinador com esse nome foi criado e 
@@ -264,14 +269,35 @@ dica: considere as linhas
       nelas você vê como usar o verbo put e como verificar o status code
 """
 
-site_treinador = "http://127.0.0.1:9000"  # quando você estiver executando o
-# servidor do treinador, essa URL estará ativa
+site_treinador = "http://127.0.0.1:9000"  # quando você estiver executando o servidor do treinador, essa URL estará ativa
+get_treinador = f"{site_treinador}/treinador"
+
+# def recuperaDadosURL(url, nome):
+#     urlBase = f"{url}/{nome}"
+#     resp = requests.put(put_treinador)
+
+
+def tratamentoDeDados(dado):
+    dado = dado.lower()
 
 
 def cadastrar_treinador(nome):
-    pass
+    put_treinador = f"{get_treinador}/{nome}"
+    resp = requests.put(put_treinador)
+
+    if resp.status_code == 202:
+        return True
+    elif resp.status_code == 303:
+        return False
+    else:
+        return False
 
 
+cadastrar_treinador("Ash Ketchum")
+cadastrar_treinador("Misty")
+
+
+# cadastrar_treinador('Ash Ketchum')
 # nao precisa mexer nas proximas excessões
 # São só erros pra você lançar nas próximas funções
 # Leia os nomes delas, e use quando apropriado.
@@ -318,7 +344,29 @@ está fazendo um cadastro dobrado
 
 
 def cadastrar_pokemon(nome_treinador, apelido_pokemon, tipo_pokemon, experiencia):
-    pass
+    url = urlBase + tipo_pokemon.lower()
+    resp = requests.get(url)
+    if resp.status_code != 200:
+        raise PokemonNaoExisteException()
+
+    url_treinador = f"{get_treinador}/{nome_treinador}/{apelido_pokemon}"
+    resp_treinador = requests.get(url_treinador)
+
+    if resp_treinador.status_code == 200:
+        raise PokemonJaCadastradoException("Pokemon já cadastrado")
+
+    else:
+        payload = {"tipo": tipo_pokemon, "experiencia": experiencia}
+        resp_treinador = requests.put(url_treinador, json=payload)
+
+        if resp_treinador.status_code == 202:
+            return True
+
+        if resp_treinador.status_code == 404:
+            raise TreinadorNaoCadastradoException("Treinador não cadastrado")
+
+        if resp_treinador.status_code == 409:
+            raise PokemonJaCadastradoException()
 
 
 """
@@ -342,7 +390,19 @@ O cod de status de sucesso é o 204
 
 
 def ganhar_experiencia(nome_treinador, apelido_pokemon, experiencia):
-    pass
+
+    url = f"{get_treinador}/{nome_treinador}/{apelido_pokemon}/exp"
+    result = requests.post(url, json={"experiencia": experiencia})
+
+    if result.status_code == 204:
+        return True
+    elif result.status_code == 404:
+        if "Treinador" in result.text:
+            raise TreinadorNaoCadastradoException("Treinador não encontrado!")
+        else:
+            raise PokemonNaoCadastradoException(
+                "Pokémon não cadastrado para este treinador"
+            )
 
 
 """
@@ -386,11 +446,34 @@ Pokemon(nome_treinador, apelido_pokemon, tipo, experiencia, nivel_do_pokemon(tip
 
 
 def localizar_pokemon(nome_treinador, apelido_pokemon):
-    pass
+
+    url = f"{get_treinador}/{nome_treinador}/{apelido_pokemon}"
+    result = requests.get(url)
+
+    if result.status_code == 200:
+        dados = result.json()
+        tipo = dados["tipo"]
+        experiencia = dados["experiencia"]
+        nivel = nivel_do_pokemon(tipo, experiencia)
+        cor = cor_do_pokemon(tipo)
+        evolucao = evolucao_anterior(tipo)
+        return Pokemon(
+            nome_treinador, apelido_pokemon, tipo, experiencia, nivel, cor, evolucao
+        )
+    if result.status_code == 404:
+        if "Treinador" in result.text:
+            raise TreinadorNaoCadastradoException("Treinador não encontrado!")
+        else:
+            raise PokemonNaoCadastradoException("Pokémon não cadastrado para este treinador")
+
+
+# Utilize a função localizar_pokemon para encontrar o Pokémon desejado
 
 
 """
-13. Dado o nome de um treinador, localize-o na API do treinador e retorne um dicionário dos seus pokemons. As chaves do dicionário serão os apelidos dos pokémons dele, e os valores serão os tipos (pikachu, bulbasaur ...) deles.
+13. Dado o nome de um treinador, localize-o na API do treinador e retorne um dicionário dos seus pokemons. 
+As chaves do dicionário serão os apelidos dos pokémons dele, e os valores serão os tipos (pikachu, bulbasaur ...)
+ deles.
 
 Essas informações estão na URL "{site_treinador}/treinador/{nome_treinador}",
 acessiveis com o verbo GET
@@ -400,8 +483,19 @@ as funções anteriores para criar um treinador e seus pokemons...)
 
 
 def detalhar_treinador(nome_treinador):
-    pass
+    # nome_treinador = nome_treinador.lower()
 
+    url = f"{get_treinador}/{nome_treinador}"
+    dado = requests.get(url)
+    if dado.status_code == 200:
+        result = dado.json()
+        pokemons = {}
+        for apelido, tipo  in  result['pokemons'].items():
+            tipo = tipo['tipo']
+            pokemons[apelido] = tipo
+        return  pokemons
+    else:
+        raise TreinadorNaoCadastradoException("Treinador não encontrado!")
 
 """
 14. Dado o nome de um treinador, localize-o na API do treinador e exclua-o, juntamente com todos os seus pokémons.
@@ -414,8 +508,12 @@ Para enviar um request com o verbo delete, use requests.delete(url)
 
 
 def excluir_treinador(nome_treinador):
-    pass
-
+    url = f"{get_treinador}/{nome_treinador}"
+    dado = requests.delete(url)
+    if dado.status_code == 200:
+        return True
+    elif dado.status_code == 404:
+        raise TreinadorNaoCadastradoException("Treinador não encontrado!")
 
 """
 15. Dado o nome de um treinador e o apelido de um de seus pokémons, localize o pokémon na API do treinador e exclua-o.
@@ -427,8 +525,21 @@ O status code vai de informar se o treinador não existe, ou se o pokemon nao ex
 
 
 def excluir_pokemon(nome_treinador, apelido_pokemon):
-    pass
+    # nome_treinador = nome_treinador.lower()
 
+    url = f"{get_treinador}/{nome_treinador}/{apelido_pokemon}"
+    dado = requests.delete(url)
+    if dado.status_code == 200:
+        return True
+    if dado.status_code == 404:
+        if "Treinador" in dado.text:
+            raise TreinadorNaoCadastradoException("Treinador não encontrado!")
+        else:
+            raise PokemonNaoCadastradoException("Pokémon não cadastrado para este treinador")
+
+# cadastrar_treinador("Ash Ketchum")
+# cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
+excluir_pokemon("Ash Ketchum", "P")
 
 """
 O próximo exercício é um desafio, não tem nada a ver com o treinador.py, 
@@ -443,5 +554,5 @@ Note que esta função dá como resultado somente o próximo passo evolutivo. As
 Se o pokémon não evolui, retorne uma lista vazia. Por exemplo, evolucoes_proximas('celebi') == []
 
 O exercicio 16 é bastante dificil e opcional.
-Talvez seja útil procurar e aprender sobre recursão.
+Talvez seja útil procurar e aprender sobre recursão.    
 """
