@@ -3,16 +3,16 @@ import unittest
 from requests import api, exceptions
 
 from pokemon import (
-# nome_do_pokemon,
-# numero_do_pokemon,
-# color_of_pokemon,
-# cor_do_pokemon,
-# tipos_do_pokemon,
-# nivel_do_pokemon, 
-# cadastrar_treinador,
-# cadastrar_pokemon,
-# cadastrar_pokemon, 
-# ganhar_experiencia,
+nome_do_pokemon,
+numero_do_pokemon,
+color_of_pokemon,
+cor_do_pokemon,
+tipos_do_pokemon,
+nivel_do_pokemon, 
+cadastrar_treinador,
+cadastrar_pokemon,
+cadastrar_pokemon, 
+ganhar_experiencia,
 localizar_pokemon, 
 )
 from pokemon import *
@@ -201,343 +201,343 @@ class TestPokeapi(unittest.TestCase):
         resposta = requests.post(f"{site_treinador}/reset")
         self.assertEqual(resposta.status_code, 200)
 
-    # def test_09a_ok(self):
-    #     verificar_online("pokeapi+treinador")
-    #     self.reset()
+    def test_09a_ok(self):
+        verificar_online("pokeapi+treinador")
+        self.reset()
        
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {})
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {})
 
-    #     self.assertTrue(cadastrar_treinador("Ash Ketchum"))
+        self.assertTrue(cadastrar_treinador("Ash Ketchum"))
 
-    #     self.assertTrue(cadastrar_treinador("Misty"))
+        self.assertTrue(cadastrar_treinador("Misty"))
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {}},
-    #         "Misty": {"nome": "Misty", "pokemons": {}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {}},
+            "Misty": {"nome": "Misty", "pokemons": {}}
+        })
 
-    # def test_09b_limpeza(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Jessie"))
-    #     self.assertTrue(cadastrar_treinador("James"))
-    #     self.reset()
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {})
+    def test_09b_limpeza(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Jessie"))
+        self.assertTrue(cadastrar_treinador("James"))
+        self.reset()
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {})
 
-    # def test_09c_repetido(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Jessie"))
-    #     self.assertFalse(cadastrar_treinador("Jessie"))
+    def test_09c_repetido(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Jessie"))
+        self.assertFalse(cadastrar_treinador("Jessie"))
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Jessie": {"nome": "Jessie", "pokemons": {}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Jessie": {"nome": "Jessie", "pokemons": {}}
+        })
 
-    # def test_10a_ok(self):
-    #     self.reset()
+    def test_10a_ok(self):
+        self.reset()
 
-    #     oldMaxDiff = self.maxDiff
-    #     self.maxDiff = None
+        oldMaxDiff = self.maxDiff
+        self.maxDiff = None
 
-    #     self.assertTrue(cadastrar_treinador("Ash Ketchum"))
-    #     cadastrar_pokemon("Ash Ketchum", "P", "Pikachu", 50000)
-    #     self.assertTrue(cadastrar_treinador("Misty"))
-    #     cadastrar_pokemon("Misty", "A", "STARYU", 10000)
-    #     cadastrar_pokemon("Misty", "B", "sTaRyU", 12000)
-    #     self.assertTrue(cadastrar_treinador("Brock"))
-    #     cadastrar_pokemon("Brock", "O", "onix", 8000)
-    #     cadastrar_pokemon("Brock", "G", "Geodude", 20000)
-    #     self.assertTrue(cadastrar_treinador("James"))
-    #     cadastrar_pokemon("James", "A", "KOFFING", 5000)
-    #     cadastrar_pokemon("James", "B", "MeowTH", 20000)
+        self.assertTrue(cadastrar_treinador("Ash Ketchum"))
+        cadastrar_pokemon("Ash Ketchum", "P", "Pikachu", 50000)
+        self.assertTrue(cadastrar_treinador("Misty"))
+        cadastrar_pokemon("Misty", "A", "STARYU", 10000)
+        cadastrar_pokemon("Misty", "B", "sTaRyU", 12000)
+        self.assertTrue(cadastrar_treinador("Brock"))
+        cadastrar_pokemon("Brock", "O", "onix", 8000)
+        cadastrar_pokemon("Brock", "G", "Geodude", 20000)
+        self.assertTrue(cadastrar_treinador("James"))
+        cadastrar_pokemon("James", "A", "KOFFING", 5000)
+        cadastrar_pokemon("James", "B", "MeowTH", 20000)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {"P": {"apelido": "P", "tipo": "pikachu", "experiencia": 50000}}},
-    #         "Misty": {"nome": "Misty", "pokemons": {"A": {"apelido": "A", "tipo": "staryu", "experiencia": 10000}, "B": {"apelido": "B", "tipo": "staryu", "experiencia": 12000}}},
-    #         "Brock": {"nome": "Brock", "pokemons": {"O": {"apelido": "O", "tipo": "onix", "experiencia": 8000}, "G": {"apelido": "G", "tipo": "geodude", "experiencia": 20000}}},
-    #         "James": {
-    #             "nome": "James",
-    #             "pokemons": {
-    #                 "A": {"apelido": "A", "tipo": "koffing", "experiencia": 5000},
-    #                 "B": {"apelido": "B", "tipo": "meowth", "experiencia": 20000}
-    #             }
-    #         }
-    #     })
-    #     self.maxDiff = oldMaxDiff
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {"P": {"apelido": "P", "tipo": "pikachu", "experiencia": 50000}}},
+            "Misty": {"nome": "Misty", "pokemons": {"A": {"apelido": "A", "tipo": "staryu", "experiencia": 10000}, "B": {"apelido": "B", "tipo": "staryu", "experiencia": 12000}}},
+            "Brock": {"nome": "Brock", "pokemons": {"O": {"apelido": "O", "tipo": "onix", "experiencia": 8000}, "G": {"apelido": "G", "tipo": "geodude", "experiencia": 20000}}},
+            "James": {
+                "nome": "James",
+                "pokemons": {
+                    "A": {"apelido": "A", "tipo": "koffing", "experiencia": 5000},
+                    "B": {"apelido": "B", "tipo": "meowth", "experiencia": 20000}
+                }
+            }
+        })
+        self.maxDiff = oldMaxDiff
 
-    # def test_10b_treinador_nao_existe(self):
-    #     self.reset()
-    #     treinador_nao_cadastrado(lambda: cadastrar_pokemon(
-    #         "Max", "D", "lapras", 40000), self)
-    #     self.assertEqual(requests.get(
-    #         f"{site_treinador}/treinador").json(), {})
+    def test_10b_treinador_nao_existe(self):
+        self.reset()
+        treinador_nao_cadastrado(lambda: cadastrar_pokemon(
+            "Max", "D", "lapras", 40000), self)
+        self.assertEqual(requests.get(
+            f"{site_treinador}/treinador").json(), {})
 
-    # def test_10c_pokemon_nao_existe(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Iris"))
-    #     pokemon_nao_existe(lambda: cadastrar_pokemon(
-    #         "Iris", "D", "homer", 40000), self)
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Iris": {"nome": "Iris", "pokemons": {}}
-    #     })
+    def test_10c_pokemon_nao_existe(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Iris"))
+        pokemon_nao_existe(lambda: cadastrar_pokemon(
+            "Iris", "D", "homer", 40000), self)
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Iris": {"nome": "Iris", "pokemons": {}}
+        })
 
-    # def test_10d_pokemon_ja_existe(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Misty"))
-    #     cadastrar_pokemon("Misty", "estrela", "STARMIE", 40000)
-    #     pokemon_ja_cadastrado(lambda: cadastrar_pokemon(
-    #         "Misty", "estrela", "staryu", 1000), self)
+    def test_10d_pokemon_ja_existe(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Misty"))
+        cadastrar_pokemon("Misty", "estrela", "STARMIE", 40000)
+        pokemon_ja_cadastrado(lambda: cadastrar_pokemon(
+            "Misty", "estrela", "staryu", 1000), self)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Misty": {"nome": "Misty", "pokemons": {"estrela": {"apelido": "estrela", "tipo": "starmie", "experiencia": 40000}}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Misty": {"nome": "Misty", "pokemons": {"estrela": {"apelido": "estrela", "tipo": "starmie", "experiencia": 40000}}}
+        })
 
-    # def test_10e_treinador_errado(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Ash Ketchum"))
-    #     treinador_nao_cadastrado(lambda: cadastrar_pokemon(
-    #         "Gary", "pi", "pikachu", 40000), self)
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {}}
-    #     })
+    def test_10e_treinador_errado(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Ash Ketchum"))
+        treinador_nao_cadastrado(lambda: cadastrar_pokemon(
+            "Gary", "pi", "pikachu", 40000), self)
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {}}
+        })
 
-    # def test_11f_treinador_repetido(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Jessie"))
-    #     self.assertFalse(cadastrar_treinador("Jessie"))
+    def test_11f_treinador_repetido(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Jessie"))
+        self.assertFalse(cadastrar_treinador("Jessie"))
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Jessie": {"nome": "Jessie", "pokemons": {}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Jessie": {"nome": "Jessie", "pokemons": {}}
+        })
 
-    #     cadastrar_pokemon("Jessie", "A", "ARBOK", 20000)
-    #     cadastrar_pokemon("Jessie", "B", "wobbuffet", 2000)
-    #     cadastrar_pokemon("Jessie", "C", "Lickitung", 2500)
-    #     self.assertFalse(cadastrar_treinador("Jessie"))
+        cadastrar_pokemon("Jessie", "A", "ARBOK", 20000)
+        cadastrar_pokemon("Jessie", "B", "wobbuffet", 2000)
+        cadastrar_pokemon("Jessie", "C", "Lickitung", 2500)
+        self.assertFalse(cadastrar_treinador("Jessie"))
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Jessie": {
-    #             "nome": "Jessie",
-    #             "pokemons": {
-    #                 "A": {"apelido": "A", "tipo": "arbok", "experiencia": 20000},
-    #                 "B": {"apelido": "B", "tipo": "wobbuffet", "experiencia": 2000},
-    #                 "C": {"apelido": "C", "tipo": "lickitung", "experiencia": 2500}
-    #             }
-    #         }
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Jessie": {
+                "nome": "Jessie",
+                "pokemons": {
+                    "A": {"apelido": "A", "tipo": "arbok", "experiencia": 20000},
+                    "B": {"apelido": "B", "tipo": "wobbuffet", "experiencia": 2000},
+                    "C": {"apelido": "C", "tipo": "lickitung", "experiencia": 2500}
+                }
+            }
+        })
 
-    # def test_11a_ok(self):
-    #     self.reset()
+    def test_11a_ok(self):
+        self.reset()
 
-    #     self.assertTrue(cadastrar_treinador("Ash Ketchum"))
-    #     cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
-    #     ganhar_experiencia("Ash Ketchum", "P", 1500)
+        self.assertTrue(cadastrar_treinador("Ash Ketchum"))
+        cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
+        ganhar_experiencia("Ash Ketchum", "P", 1500)
 
-    #     self.assertTrue(cadastrar_treinador("James"))
-    #     cadastrar_pokemon("James", "P", "WEEZING", 10000)
-    #     cadastrar_pokemon("James", "Q", "VictREeBEL", 12000)
-    #     ganhar_experiencia("James", "P", 2500)
+        self.assertTrue(cadastrar_treinador("James"))
+        cadastrar_pokemon("James", "P", "WEEZING", 10000)
+        cadastrar_pokemon("James", "Q", "VictREeBEL", 12000)
+        ganhar_experiencia("James", "P", 2500)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {"P": {"apelido": "P", "tipo": "pikachu", "experiencia": 51500}}},
-    #         "James": {"nome": "James", "pokemons": {"P": {"apelido": "P", "tipo": "weezing", "experiencia": 12500}, "Q": {"apelido": "Q", "tipo": "victreebel", "experiencia": 12000}}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Ash Ketchum": {"nome": "Ash Ketchum", "pokemons": {"P": {"apelido": "P", "tipo": "pikachu", "experiencia": 51500}}},
+            "James": {"nome": "James", "pokemons": {"P": {"apelido": "P", "tipo": "weezing", "experiencia": 12500}, "Q": {"apelido": "Q", "tipo": "victreebel", "experiencia": 12000}}}
+        })
 
-    # def test_11b_treinador_nao_existe(self):
-    #     self.reset()
-    #     treinador_nao_cadastrado(lambda: ganhar_experiencia(
-    #         "Cilan", "bob-esponja", 10000), self)
-    #     self.assertEqual(requests.get(
-    #         f"{site_treinador}/treinador").json(), {})
+    def test_11b_treinador_nao_existe(self):
+        self.reset()
+        treinador_nao_cadastrado(lambda: ganhar_experiencia(
+            "Cilan", "bob-esponja", 10000), self)
+        self.assertEqual(requests.get(
+            f"{site_treinador}/treinador").json(), {})
 
-    # def test_11c_pokemon_nao_existe(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Bonnie"))
-    #     pokemon_nao_cadastrado(lambda: ganhar_experiencia(
-    #         "Bonnie", "bob-esponja", 40000), self)
+    def test_11c_pokemon_nao_existe(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Bonnie"))
+        pokemon_nao_cadastrado(lambda: ganhar_experiencia(
+            "Bonnie", "bob-esponja", 40000), self)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Bonnie": {"nome": "Bonnie", "pokemons": {}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Bonnie": {"nome": "Bonnie", "pokemons": {}}
+        })
 
-    # def test_11d_treinador_errado(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Serena"))
-    #     self.assertTrue(cadastrar_treinador("Dawn"))
-    #     cadastrar_pokemon("Serena", "fen", "fennekin", 5000)
-    #     pokemon_nao_cadastrado(
-    #         lambda: ganhar_experiencia("Dawn", "fen", 100), self)
+    def test_11d_treinador_errado(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Serena"))
+        self.assertTrue(cadastrar_treinador("Dawn"))
+        cadastrar_pokemon("Serena", "fen", "fennekin", 5000)
+        pokemon_nao_cadastrado(
+            lambda: ganhar_experiencia("Dawn", "fen", 100), self)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Serena": {"nome": "Serena", "pokemons": {"fen": {"apelido": "fen", "tipo": "fennekin", "experiencia": 5000}}},
-    #         "Dawn": {"nome": "Dawn", "pokemons": {}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Serena": {"nome": "Serena", "pokemons": {"fen": {"apelido": "fen", "tipo": "fennekin", "experiencia": 5000}}},
+            "Dawn": {"nome": "Dawn", "pokemons": {}}
+        })
 
-    # def test_12a_ok(self):
-    #     self.reset()
+    def test_12a_ok(self):
+        self.reset()
 
-    #     self.assertTrue(cadastrar_treinador("Ash Ketchum"))
-    #     cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
+        self.assertTrue(cadastrar_treinador("Ash Ketchum"))
+        cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
 
-    #     self.assertTrue(cadastrar_treinador("James"))
-    #     cadastrar_pokemon("James", "P", "WEEZING", 10000)
-    #     cadastrar_pokemon("James", "Q", "Gloom", 12000)
+        self.assertTrue(cadastrar_treinador("James"))
+        cadastrar_pokemon("James", "P", "WEEZING", 10000)
+        cadastrar_pokemon("James", "Q", "Gloom", 12000)
 
-    #     pikachu = localizar_pokemon("Ash Ketchum", "P")
-    #     weezing = localizar_pokemon("James", "P")
-    #     gloom = localizar_pokemon("James", "Q")
+        pikachu = localizar_pokemon("Ash Ketchum", "P")
+        weezing = localizar_pokemon("James", "P")
+        gloom = localizar_pokemon("James", "Q")
 
-    #     self.assertIs(type(pikachu), Pokemon)
-    #     self.assertEqual(pikachu.nome_treinador, "Ash Ketchum")
-    #     self.assertEqual(pikachu.apelido, "P")
-    #     self.assertEqual(pikachu.tipo, "pikachu")
-    #     self.assertEqual(pikachu.experiencia, 50000)
-    #     self.assertEqual(pikachu.nivel, 36)
-    #     self.assertEqual(pikachu.cor, "amarelo")
-    #     self.assertEqual(pikachu.evoluiu_de, "pichu")
+        self.assertIs(type(pikachu), Pokemon)
+        self.assertEqual(pikachu.nome_treinador, "Ash Ketchum")
+        self.assertEqual(pikachu.apelido, "P")
+        self.assertEqual(pikachu.tipo, "pikachu")
+        self.assertEqual(pikachu.experiencia, 50000)
+        self.assertEqual(pikachu.nivel, 36)
+        self.assertEqual(pikachu.cor, "amarelo")
+        self.assertEqual(pikachu.evoluiu_de, "pichu")
 
-    #     self.assertIs(type(weezing), Pokemon)
-    #     self.assertEqual(weezing.nome_treinador, "James")
-    #     self.assertEqual(weezing.apelido, "P")
-    #     self.assertEqual(weezing.tipo, "weezing")
-    #     self.assertEqual(weezing.experiencia, 10000)
-    #     self.assertEqual(weezing.nivel, 21)
-    #     self.assertEqual(weezing.cor, "roxo")
-    #     self.assertEqual(weezing.evoluiu_de, "koffing")
+        self.assertIs(type(weezing), Pokemon)
+        self.assertEqual(weezing.nome_treinador, "James")
+        self.assertEqual(weezing.apelido, "P")
+        self.assertEqual(weezing.tipo, "weezing")
+        self.assertEqual(weezing.experiencia, 10000)
+        self.assertEqual(weezing.nivel, 21)
+        self.assertEqual(weezing.cor, "roxo")
+        self.assertEqual(weezing.evoluiu_de, "koffing")
 
-    #     self.assertIs(type(gloom), Pokemon)
-    #     self.assertEqual(gloom.nome_treinador, "James")
-    #     self.assertEqual(gloom.apelido, "Q")
-    #     self.assertEqual(gloom.tipo, "gloom")
-    #     self.assertEqual(gloom.experiencia, 12000)
-    #     self.assertEqual(gloom.nivel, 25)
-    #     self.assertEqual(gloom.cor, "azul")
-    #     self.assertEqual(gloom.evoluiu_de, "oddish")
+        self.assertIs(type(gloom), Pokemon)
+        self.assertEqual(gloom.nome_treinador, "James")
+        self.assertEqual(gloom.apelido, "Q")
+        self.assertEqual(gloom.tipo, "gloom")
+        self.assertEqual(gloom.experiencia, 12000)
+        self.assertEqual(gloom.nivel, 25)
+        self.assertEqual(gloom.cor, "azul")
+        self.assertEqual(gloom.evoluiu_de, "oddish")
 
-    # def test_12b_treinador_nao_existe(self):
-    #     self.reset()
-    #     treinador_nao_cadastrado(
-    #         lambda: localizar_pokemon("Cilan", "bob-esponja"), self)
-    #     self.assertEqual(requests.get(
-    #         f"{site_treinador}/treinador").json(), {})
+    def test_12b_treinador_nao_existe(self):
+        self.reset()
+        treinador_nao_cadastrado(
+            lambda: localizar_pokemon("Cilan", "bob-esponja"), self)
+        self.assertEqual(requests.get(
+            f"{site_treinador}/treinador").json(), {})
 
-    # def test_12c_pokemon_nao_existe(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Bonnie"))
-    #     pokemon_nao_cadastrado(lambda: localizar_pokemon(
-    #         "Bonnie", "bob-esponja"), self)
+    def test_12c_pokemon_nao_existe(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Bonnie"))
+        pokemon_nao_cadastrado(lambda: localizar_pokemon(
+            "Bonnie", "bob-esponja"), self)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Bonnie": {"nome": "Bonnie", "pokemons": {}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Bonnie": {"nome": "Bonnie", "pokemons": {}}
+        })
 
-    # def test_12d_treinador_errado(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Serena"))
-    #     self.assertTrue(cadastrar_treinador("Dawn"))
-    #     cadastrar_pokemon("Serena", "fen", "fennekin", 5000)
-    #     pokemon_nao_cadastrado(lambda: localizar_pokemon("Dawn", "fen"), self)
+    def test_12d_treinador_errado(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Serena"))
+        self.assertTrue(cadastrar_treinador("Dawn"))
+        cadastrar_pokemon("Serena", "fen", "fennekin", 5000)
+        pokemon_nao_cadastrado(lambda: localizar_pokemon("Dawn", "fen"), self)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Serena": {"nome": "Serena", "pokemons": {"fen": {"apelido": "fen", "tipo": "fennekin", "experiencia": 5000}}},
-    #         "Dawn": {"nome": "Dawn", "pokemons": {}}
-    #     })
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Serena": {"nome": "Serena", "pokemons": {"fen": {"apelido": "fen", "tipo": "fennekin", "experiencia": 5000}}},
+            "Dawn": {"nome": "Dawn", "pokemons": {}}
+        })
 
-    # def test_13a_ok(self):
-    #     self.reset()
+    def test_13a_ok(self):
+        self.reset()
 
-    #     self.assertTrue(cadastrar_treinador("Ash Ketchum"))
-    #     cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
+        self.assertTrue(cadastrar_treinador("Ash Ketchum"))
+        cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
 
-    #     self.assertTrue(cadastrar_treinador("James"))
-    #     cadastrar_pokemon("James", "P", "WEEZING", 10000)
-    #     cadastrar_pokemon("James", "Q", "WeepinBElL", 12000)
+        self.assertTrue(cadastrar_treinador("James"))
+        cadastrar_pokemon("James", "P", "WEEZING", 10000)
+        cadastrar_pokemon("James", "Q", "WeepinBElL", 12000)
 
-    #     ash = detalhar_treinador("Ash Ketchum")
-    #     james = detalhar_treinador("James")
+        ash = detalhar_treinador("Ash Ketchum")
+        james = detalhar_treinador("James")
 
-    #     self.assertEqual(ash, {"P": "pikachu"})
-    #     self.assertEqual(james, {"P": "weezing", "Q": "weepinbell"})
+        self.assertEqual(ash, {"P": "pikachu"})
+        self.assertEqual(james, {"P": "weezing", "Q": "weepinbell"})
 
-    # def test_13b_treinador_nao_existe(self):
-    #     self.reset()
-    #     treinador_nao_cadastrado(lambda: detalhar_treinador("Cilan"), self)
-    #     self.assertEqual(requests.get(
-    #         f"{site_treinador}/treinador").json(), {})
+    def test_13b_treinador_nao_existe(self):
+        self.reset()
+        treinador_nao_cadastrado(lambda: detalhar_treinador("Cilan"), self)
+        self.assertEqual(requests.get(
+            f"{site_treinador}/treinador").json(), {})
 
-    # def test_14a_ok(self):
-    #     self.reset()
+    def test_14a_ok(self):
+        self.reset()
 
-    #     self.assertTrue(cadastrar_treinador("Ash Ketchum"))
-    #     cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
+        self.assertTrue(cadastrar_treinador("Ash Ketchum"))
+        cadastrar_pokemon("Ash Ketchum", "P", "pikachu", 50000)
 
-    #     self.assertTrue(cadastrar_treinador("Prof. Carvalho"))
+        self.assertTrue(cadastrar_treinador("Prof. Carvalho"))
 
-    #     self.assertTrue(cadastrar_treinador("James"))
-    #     cadastrar_pokemon("James", "P", "WEEZING", 10000)
-    #     cadastrar_pokemon("James", "Q", "WeepinBElL", 12000)
+        self.assertTrue(cadastrar_treinador("James"))
+        cadastrar_pokemon("James", "P", "WEEZING", 10000)
+        cadastrar_pokemon("James", "Q", "WeepinBElL", 12000)
 
-    #     excluir_treinador("Ash Ketchum")
+        excluir_treinador("Ash Ketchum")
 
-    #     resposta1 = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta1.json(), {
-    #         "James": {"nome": "James", "pokemons": {"P": {"apelido": "P", "tipo": "weezing", "experiencia": 10000}, "Q": {"apelido": "Q", "tipo": "weepinbell", "experiencia": 12000}}},
-    #         "Prof. Carvalho": {"nome": "Prof. Carvalho", "pokemons": {}}
-    #     })
-    #     treinador_nao_cadastrado(
-    #         lambda: detalhar_treinador("Ash Ketchum"), self)
-    #     treinador_nao_cadastrado(
-    #         lambda: localizar_pokemon("Ash Ketchum", "P"), self)
+        resposta1 = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta1.json(), {
+            "James": {"nome": "James", "pokemons": {"P": {"apelido": "P", "tipo": "weezing", "experiencia": 10000}, "Q": {"apelido": "Q", "tipo": "weepinbell", "experiencia": 12000}}},
+            "Prof. Carvalho": {"nome": "Prof. Carvalho", "pokemons": {}}
+        })
+        treinador_nao_cadastrado(
+            lambda: detalhar_treinador("Ash Ketchum"), self)
+        treinador_nao_cadastrado(
+            lambda: localizar_pokemon("Ash Ketchum", "P"), self)
 
-    #     excluir_treinador("James")
+        excluir_treinador("James")
 
-    #     resposta2 = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta2.json(), {
-    #         "Prof. Carvalho": {"nome": "Prof. Carvalho", "pokemons": {}}
-    #     })
-    #     treinador_nao_cadastrado(lambda: detalhar_treinador("James"), self)
-    #     treinador_nao_cadastrado(lambda: localizar_pokemon("James", "P"), self)
-    #     treinador_nao_cadastrado(lambda: localizar_pokemon("James", "Q"), self)
+        resposta2 = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta2.json(), {
+            "Prof. Carvalho": {"nome": "Prof. Carvalho", "pokemons": {}}
+        })
+        treinador_nao_cadastrado(lambda: detalhar_treinador("James"), self)
+        treinador_nao_cadastrado(lambda: localizar_pokemon("James", "P"), self)
+        treinador_nao_cadastrado(lambda: localizar_pokemon("James", "Q"), self)
 
-    #     excluir_treinador("Prof. Carvalho")
+        excluir_treinador("Prof. Carvalho")
 
-    #     resposta3 = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta3.json(), {})
-    #     treinador_nao_cadastrado(
-    #         lambda: detalhar_treinador("Prof. Carvalho"), self)
+        resposta3 = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta3.json(), {})
+        treinador_nao_cadastrado(
+            lambda: detalhar_treinador("Prof. Carvalho"), self)
 
-    # def test_14b_treinador_nao_existe(self):
-    #     self.reset()
+    def test_14b_treinador_nao_existe(self):
+        self.reset()
 
-    #     treinador_nao_cadastrado(lambda: excluir_treinador("Kiawe"), self)
-    #     self.assertEqual(requests.get(
-    #         f"{site_treinador}/treinador").json(), {})
+        treinador_nao_cadastrado(lambda: excluir_treinador("Kiawe"), self)
+        self.assertEqual(requests.get(
+            f"{site_treinador}/treinador").json(), {})
 
-    #     self.assertTrue(cadastrar_treinador("Kiawe"))
-    #     cadastrar_pokemon("Kiawe", "c", "charizard", 50000)
-    #     treinador_nao_cadastrado(lambda: excluir_treinador("Lillie"), self)
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {
-    #         "Kiawe": {"nome": "Kiawe", "pokemons": {"c": {"apelido": "c", "tipo": "charizard", "experiencia": 50000}}}
-    #     })
+        self.assertTrue(cadastrar_treinador("Kiawe"))
+        cadastrar_pokemon("Kiawe", "c", "charizard", 50000)
+        treinador_nao_cadastrado(lambda: excluir_treinador("Lillie"), self)
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {
+            "Kiawe": {"nome": "Kiawe", "pokemons": {"c": {"apelido": "c", "tipo": "charizard", "experiencia": 50000}}}
+        })
 
-    #     excluir_treinador("Kiawe")
-    #     self.assertEqual(requests.get(
-    #         f"{site_treinador}/treinador").json(), {})
+        excluir_treinador("Kiawe")
+        self.assertEqual(requests.get(
+            f"{site_treinador}/treinador").json(), {})
 
     def test_15a_ok(self):
         self.reset()
@@ -669,24 +669,24 @@ class TestPokeapi(unittest.TestCase):
     #     pokemon_nao_existe(lambda: evolucoes_proximas("batman"), self)
     #     pokemon_nao_existe(lambda: evolucoes_proximas("SpiderMan"), self)
 
-    # def test_98a_limpeza(self):
-    #     self.reset()
-    #     self.assertTrue(cadastrar_treinador("Tracey"))
-    #     cadastrar_pokemon("Tracey", "m", "MARILL", 40000)
+    def test_98a_limpeza(self):
+        self.reset()
+        self.assertTrue(cadastrar_treinador("Tracey"))
+        cadastrar_pokemon("Tracey", "m", "MARILL", 40000)
 
-    #     self.reset()
-    #     treinador_nao_cadastrado(lambda: detalhar_treinador("Tracey"), self)
-    #     treinador_nao_cadastrado(
-    #         lambda: localizar_pokemon("Tracey", "m"), self)
-    #     treinador_nao_cadastrado(
-    #         lambda: ganhar_experiencia("Tracey", "m", 4000), self)
-    #     treinador_nao_cadastrado(lambda: cadastrar_pokemon(
-    #         "Tracey", "t", "togepi", 500), self)
-    #     treinador_nao_cadastrado(lambda: excluir_pokemon("Tracey", "t"), self)
-    #     treinador_nao_cadastrado(lambda: excluir_treinador("Tracey"), self)
+        self.reset()
+        treinador_nao_cadastrado(lambda: detalhar_treinador("Tracey"), self)
+        treinador_nao_cadastrado(
+            lambda: localizar_pokemon("Tracey", "m"), self)
+        treinador_nao_cadastrado(
+            lambda: ganhar_experiencia("Tracey", "m", 4000), self)
+        treinador_nao_cadastrado(lambda: cadastrar_pokemon(
+            "Tracey", "t", "togepi", 500), self)
+        treinador_nao_cadastrado(lambda: excluir_pokemon("Tracey", "t"), self)
+        treinador_nao_cadastrado(lambda: excluir_treinador("Tracey"), self)
 
-    #     resposta = requests.get(f"{site_treinador}/treinador")
-    #     self.assertEqual(resposta.json(), {})
+        resposta = requests.get(f"{site_treinador}/treinador")
+        self.assertEqual(resposta.json(), {})
 
     def test_99a_print(self):
         sem_io.test_print(self)
